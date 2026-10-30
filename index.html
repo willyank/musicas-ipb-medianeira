@@ -8922,6 +8922,22 @@ window.TONES = TONES;
     return out;
   }
 
+  var INSTR = /^\s*\(?\s*(?:aten[cç][aã]o|repet(?:e|ir))\b/i;
+  var INSTR_IN = /\((?:aten[cç][aã]o|repet(?:e|ir))\b[^)]*\)?/i;
+  function markInstr(nodes) {
+    for (var i = 0; i < nodes.length; i++) {
+      var m = INSTR_IN.exec(nodes[i].nodeValue);
+      if (!m) continue;
+      var part = nodes[i].splitText(m.index);
+      part.splitText(m[0].length);
+      var sp = document.createElement('span');
+      sp.className = 'instr';
+      part.parentNode.insertBefore(sp, part);
+      sp.appendChild(part);
+      return;
+    }
+  }
+
   function collect(note) {
     var body = note.querySelector('.body'), units = [], prev = false;
     if (!body) return units;
@@ -8930,9 +8946,11 @@ window.TONES = TONES;
       if (!nodes.length) { prev = false; return; }
       var parts = nodes.map(function (x) { return x.nodeValue; });
       var line = parts.join('');
-      // instructions for how to play ("(ATENÇÃO: vai direto para...)") are shown in grey, smaller
-      if (/^\s*\(?\s*aten[cç][aã]o\b/i.test(line)) d.classList.add('instr');
       var ch = isChordLine(line);
+      // instructions for how to play ("(ATENÇÃO: vai direto para...)", "(repete: ...)") are shown in grey, smaller:
+      // the whole line, or just the part in parentheses when it sits at the end of a verse
+      if (INSTR.test(line)) d.classList.add('instr');
+      else if (!ch) markInstr(nodes);
       // lines whose columns matter (chords, the lyric under them, spaced-out text) never wrap
       if (ch || prev || /\S[ \u00a0]{2,}\S/.test(line)) d.classList.add('nw');
       if (ch) { d.classList.add('chord'); units.push({nodes: nodes, orig: parts}); }
