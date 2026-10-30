@@ -1,0 +1,14 @@
+# Only the site and its documentation go to GitHub. Everything else in this folder stays local:
+# the WhatsApp chat export (names and phone numbers), the hymnal PDF, backups, edit files, etc.
+*
+!.gitignore
+!.nojekyll
+!index.html
+!manifest.webmanifest
+!sw.js
+!icon-192.png
+!icon-512.png
+!README.md
+!ferramentas/
+ferramentas/*
+!ferramentas/aplicar_alteracoes.py
