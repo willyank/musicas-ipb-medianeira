@@ -37,7 +37,7 @@ Os cinco primeiros precisam ficar **sempre juntos na mesma pasta** e ser publica
 
 ### Lista de músicas e busca
 - A **lista lateral** mostra todas as músicas em ordem alfabética, **ignorando acentos e maiúsculas** ("Águas purificadoras" fica entre "Adoramos o Cordeiro" e "Ajuntamento"). Clique num título para ir até a música.
-- A **busca** (campo no topo da lista) filtra enquanto você digita. Ela procura no **título, na letra e nas cifras**, sem diferenciar acentos nem maiúsculas: buscar "bencao" encontra "bênção". O contador abaixo mostra quantas músicas foram encontradas.
+- A **busca** (campo logo acima da lista de músicas, abaixo dos atalhos) filtra enquanto você digita. Enquanto há texto na busca, os atalhos se recolhem numa linha só, para os resultados terem espaço. Ela procura no **título, na letra e nas cifras**, sem diferenciar acentos nem maiúsculas: buscar "bencao" encontra "bênção". O contador abaixo mostra quantas músicas foram encontradas.
 
 ### Visual das músicas
 - Fonte monoespaçada, para manter as cifras alinhadas sobre as sílabas certas.
@@ -45,7 +45,7 @@ Os cinco primeiros precisam ficar **sempre juntos na mesma pasta** e ser publica
 - O padrão visual foi baseado na música "Colossenses 1 - Projeto Sola".
 
 ### Botões de opções
-No topo da lista lateral (no celular, dentro do menu **☰**) ficam quatro botões. Cada um mostra o estado atual, e a escolha fica salva:
+No rodapé da lista lateral (no celular, no fim do menu **☰**) fica **⚙ Opções ▸**, fechado. Tocando nele, abrem quatro botões; cada um mostra o estado atual, e a escolha fica salva. No celular, o tema também pode ser trocado pelo **◐** da barra do topo:
 
 | Botão | O que faz |
 |---|---|
@@ -121,7 +121,8 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
   - toque no nome para ir até a música;
   - **▲ / ▼** mudam a ordem (no computador também dá para **arrastar**);
   - **×** remove o atalho;
-  - **limpar** remove todos (pede confirmação).
+  - **⋯** (ao lado de "só atalhos") mostra **exportar**, **importar** e **limpar atalhos** (este pede confirmação);
+  - tocar em **▾ Atalhos** recolhe a caixa numa linha só (e tocar de novo abre); a escolha fica salva.
 - O botão **só atalhos** liga o **modo repertório**:
   - mostra apenas as músicas dos atalhos, **na ordem das etiquetas**;
   - no fim de cada música aparece **◀ anterior · 2 de 5 · próxima: [nome] ▶**;
@@ -144,7 +145,7 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
   O trecho depois de `#r=` é o repertório codificado (títulos, ordem, tons e anotações). A letra e as cifras não vão no link, porque já estão no site.
 
 ### Exportar / importar atalhos
-- **exportar** salva os atalhos num arquivo `atalhos-musicas.json`.
+- **exportar** (no botão **⋯** dos atalhos) salva os atalhos num arquivo `atalhos-musicas.json`.
 - **importar** carrega esse arquivo, por exemplo em outro navegador. As músicas do arquivo são **acrescentadas** aos atalhos atuais.
 - O arquivo leva só os atalhos (não os tons, tamanhos nem anotações). Para levar o repertório completo, use o link de compartilhamento.
 

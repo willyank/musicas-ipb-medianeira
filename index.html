@@ -54,14 +54,18 @@ try {
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 Arial,Helvetica,sans-serif}
 #side{position:fixed;inset:0 auto 0 0;width:320px;background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column}
-#top{padding:12px;border-bottom:1px solid var(--line)}
+#top{padding:10px 12px;border-bottom:1px solid var(--line)}
 #q{width:100%;padding:9px 10px;font-size:15px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg)}
 #info{margin-top:6px;font-size:12px;color:var(--muted)}
 #toprow{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
 #toprow #info{margin-top:0}
 .themebtn{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:5px;padding:2px 8px;cursor:pointer}
 .themebtn:hover{border-color:var(--accent);color:var(--accent)}
-#opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+#opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+#opts[hidden]{display:none}
+#optbox{border-top:1px solid var(--line);padding:4px 12px 8px}
+#optbtn{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);cursor:pointer;padding:6px 0;width:100%;text-align:left;display:flex;justify-content:space-between}
+#optbtn:hover,#optbtn[aria-expanded="true"]{color:var(--accent)}
 #fitbtn.on,#lyrbtn.on{border-color:var(--accent);color:var(--accent)}
 .tbtns{display:flex;gap:6px}
 #wakebtn.on{border-color:#e5a50a;color:#b57d00}
@@ -83,7 +87,15 @@ body.onlyfav #setfloat{display:flex}
 body.onlyfav main{padding-bottom:90px}
 #nav{overflow:auto;flex:1;padding:6px 0}
 #favbox{border-bottom:1px solid var(--line);padding:8px 12px 10px;max-height:34vh;overflow:auto}
-#favbox.closed #favs{display:none}
+#favbox.closed #favs,#favbox.closed #favbackup,#favbox.closed #favmore,#favbox.searching #favs,#favbox.searching #favbackup,#favbox.searching #favmore{display:none}
+#favbox.closed #favhead,#favbox.searching #favhead{margin-bottom:0}
+#favhead #favtoggle{border:0;background:none;padding:2px 0;margin:0;font:inherit;font-size:13px;color:var(--fg);display:flex;align-items:center;gap:6px;cursor:pointer}
+#favtoggle .arrow{display:inline-block;color:var(--muted);transition:transform .15s}
+#favbox.closed #favtoggle .arrow,#favbox.searching #favtoggle .arrow{transform:rotate(-90deg)}
+#favmore{display:flex;flex-wrap:wrap;margin:-2px 0 6px}
+#favmore[hidden]{display:none}
+#favmore button{font:inherit;font-size:11.5px;border:0;background:none;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0 8px 0 0}
+#favmore #favclear{color:#c01c28}
 #favhead{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:6px;user-select:none}
 #favhead button{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:5px;padding:2px 8px;margin-left:4px;cursor:pointer}
 #favhead button:hover,#favhead button.on{border-color:var(--accent);color:var(--accent)}
@@ -184,7 +196,9 @@ main{margin:0;padding:64px 14px 60px;max-width:100vw}
 #q{font-size:16px;padding:11px 12px}
 #nav a{padding:11px 16px;font-size:15px}
 #favbox{max-height:40vh}
-#favhead button,#favbackup button{padding:7px 11px;font-size:13px}
+#favhead button,#favbackup button,#favmore button{padding:7px 11px;font-size:13px}
+#favhead #favtoggle{padding:8px 0;font-size:14px}
+#optbtn{padding:12px 0;font-size:14px}
 #opts .themebtn{padding:7px 10px;font-size:13px}
 .chip{font-size:15px;padding:2px 2px 2px 10px}
 .chip button{min-width:38px;min-height:38px;font-size:14px}
@@ -208,14 +222,14 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <body>
 <div id="mbar"><button type="button" id="menubtn" aria-label="Abrir menu">☰</button><span id="mtitle">Músicas</span><button type="button" class="themebtn" id="mthemebtn" aria-label="Alternar tema">◐</button><button type="button" id="mtop" aria-label="Voltar ao topo">↑</button></div>
 <aside id="side">
-<div id="top"><input id="q" type="search" placeholder="Buscar em letras, cifras e títulos…" autocomplete="off">
-<div id="info">342 músicas</div>
-<div id="opts"><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button></div></div>
 <div id="favbox">
-<div id="favhead"><b>Atalhos <span id="favcount"></span></b><span><button type="button" id="favonly" title="Mostrar só as músicas dos atalhos">só atalhos</button><button type="button" id="favclear" title="Remover todos os atalhos">limpar</button></span></div>
-<div id="favbackup"><button type="button" id="favshare" title="Gerar um link com o repertório (ordem e tons) para enviar à equipe">compartilhar repertório</button><button type="button" id="favexport" title="Salvar os atalhos em um arquivo">exportar</button><button type="button" id="favimport" title="Carregar atalhos de um arquivo">importar</button><input type="file" id="favfile" accept=".json,application/json" hidden></div>
+<div id="favhead"><button type="button" id="favtoggle" aria-expanded="true" title="Mostrar ou recolher os atalhos"><span class="arrow">▾</span><b>Atalhos <span id="favcount"></span></b></button><span><button type="button" id="favonly" title="Mostrar só as músicas dos atalhos">só atalhos</button><button type="button" id="favmorebtn" title="Exportar, importar ou limpar os atalhos">⋯</button></span></div>
+<div id="favbackup"><button type="button" id="favshare" title="Gerar um link com o repertório (ordem e tons) para enviar à equipe">compartilhar repertório</button></div>
+<div id="favmore" hidden><button type="button" id="favexport" title="Salvar os atalhos em um arquivo">exportar</button><button type="button" id="favimport" title="Carregar atalhos (ou músicas editadas) de um arquivo">importar</button><button type="button" id="favclear" title="Remover todos os atalhos">limpar atalhos</button><input type="file" id="favfile" accept=".json,application/json" hidden></div>
 <div id="favs"></div>
 </div>
+<div id="top"><input id="q" type="search" placeholder="Buscar em letras, cifras e títulos…" autocomplete="off">
+<div id="info">342 músicas</div></div>
 <nav id="nav">
 <a href="#n11" data-i="11">A Alegria</a>
 <a href="#n12" data-i="12">A Ele a Glória</a>
@@ -560,6 +574,8 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <a href="#n318" data-i="318">Vim para adorar-te (Luz do mundo)</a>
 <a href="#n319" data-i="319">Vou me Lembrar - Resgate</a>
 </nav>
+<div id="optbox"><button type="button" id="optbtn" aria-expanded="false">⚙ Opções <span>▸</span></button>
+<div id="opts" hidden><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button></div></div>
 </aside>
 <main id="main">
 <section class="note" id="n11" data-key="A Alegria" data-title="A Alegria"><h2>A Alegria</h2><div class="body"><div class="para">Tom: <a class="en-link" href="https://www.cifraclub.com.br/corinhos-evangelicos/a-alegria-esta-no-coracao/#" rev="en_rl_none" shape="rect" target="_blank" title="alterar o tom">G</a></div><pre class="code"><span class="ln">[Primeira Parte]</span>
@@ -9120,7 +9136,6 @@ window.TONES = TONES;
   document.getElementById('favclear').addEventListener('click', function () {
     if (list.length && confirm('Remover todos os atalhos?')) { list = []; save(); render(); }
   });
-  document.getElementById('favhead').addEventListener('dblclick', function () { document.getElementById('favbox').classList.toggle('closed'); });
   // backup: export / import the shortcut list as a small JSON file
   document.getElementById('favexport').addEventListener('click', function () {
     var blob = new Blob([JSON.stringify({atalhos: list}, null, 1)], {type: 'application/json'});
@@ -9210,6 +9225,34 @@ window.TONES = TONES;
   updTitle();
 })();
 
+</script>
+<script>
+(function () {
+  // side menu: shortcuts can be folded (and step aside while searching), "⋯" keeps the less used actions,
+  // "⚙ Opções" stays closed at the bottom until it is tapped
+  var box = document.getElementById('favbox'), tog = document.getElementById('favtoggle'), KEY = 'atalhos-recolhidos';
+  function setClosed(v) {
+    box.classList.toggle('closed', v);
+    tog.setAttribute('aria-expanded', String(!v));
+    try { if (v) localStorage.setItem(KEY, '1'); else localStorage.removeItem(KEY); } catch (e) {}
+  }
+  try { if (localStorage.getItem(KEY)) setClosed(true); } catch (e) {}
+  tog.addEventListener('click', function () {
+    var searching = box.classList.contains('searching');
+    box.classList.remove('searching');
+    setClosed(searching ? false : !box.classList.contains('closed'));
+  });
+  var q = document.getElementById('q');
+  q.addEventListener('input', function () { box.classList.toggle('searching', !!q.value.trim()); });
+  var more = document.getElementById('favmore'), mb = document.getElementById('favmorebtn');
+  mb.addEventListener('click', function () { more.hidden = !more.hidden; mb.classList.toggle('on', !more.hidden); });
+  var ob = document.getElementById('optbtn'), opts = document.getElementById('opts');
+  ob.addEventListener('click', function () {
+    opts.hidden = !opts.hidden;
+    ob.setAttribute('aria-expanded', String(!opts.hidden));
+    ob.querySelector('span').textContent = opts.hidden ? '▸' : '▾';
+  });
+})();
 </script>
 <script>
 (function () {
