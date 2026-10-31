@@ -117,7 +117,9 @@ body.onlyfav main{padding-bottom:90px}
 .chip button.cdel:hover{color:#c01c28}
 .chip button:disabled{opacity:.25;cursor:default}
 #nav a.fav::after{content:" ★";color:#e5a50a;font-size:11px}
-body.onlyfav .note:not(.fav),body.onlyfav #nav a:not(.fav){display:none}
+body.onlyfav:not(.busca) .note:not(.fav),body.onlyfav:not(.busca) #nav a:not(.fav){display:none}
+body.onlyfav.busca main,body.onlyfav.busca #nav{display:block}
+body.onlyfav.busca .note.fav .setnav,body.onlyfav.busca #setfloat{display:none}
 .note h2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .star{margin-left:auto;font:inherit;font-size:13px;border:1px solid var(--line);background:var(--side);color:var(--fg);border-radius:14px;padding:3px 12px;cursor:pointer}
 .star:hover{border-color:#e5a50a}
@@ -8849,8 +8851,10 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
       if(ok)n++;
     });
     // only while searching: how many were found (the total sits at the bottom of the menu)
+    // with "só atalhos" on, the search still looks in every song; clearing it brings the set back
+    var b=document.body;b.classList.toggle('busca',!!v);
     info.hidden=!v;
-    info.textContent=!v?'':n?(n+' de '+notes.length+' músicas'):'Nenhuma música encontrada';
+    info.textContent=!v?'':(n?(n+' de '+notes.length+' músicas'):'Nenhuma música encontrada')+(b.classList.contains('onlyfav')?' (em todas, não só nos atalhos)':'');
   }
   document.getElementById('total').textContent=notes.length+' músicas';
   q.addEventListener('input',function(){clearTimeout(t);t=setTimeout(run,150)});
@@ -9248,7 +9252,7 @@ window.TONES = TONES;
   notes.forEach(function (n) { byKey[n.getAttribute('data-key')] = n; });
   // in repertoire mode the songs are shown in the shortcut order, not the alphabetical one
   function order() {
-    if (!b.classList.contains('onlyfav')) return notes;
+    if (!b.classList.contains('onlyfav') || b.classList.contains('busca')) return notes;
     return window.musicasAtalhos.get().map(function (k) { return byKey[k]; }).filter(Boolean);
   }
   function updTitle() {
