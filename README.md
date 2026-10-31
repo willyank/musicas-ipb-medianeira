@@ -110,7 +110,7 @@ Para mudar a própria cifra ou letra (trocar um acorde, mudar a introdução, co
    - Depois de publicar o site, cada aparelho apaga sozinho a sua edição quando ela fica igual à versão oficial.
 
 Dicas para escrever:
-- Uma linha que começa com **ATENÇÃO** ou **Repete** (com ou sem parêntese), por exemplo `(ATENÇÃO: Vai direto para Como é bom, começa a cantar antes)` ou `(repete: Deixa teu rio)`, aparece **em cinza e menor**: é uma instrução de como tocar, não algo para cantar. Se o `(repete: ...)` ou `(ATENÇÃO: ...)` estiver no fim de um verso, só esse trecho fica cinza.
+- Uma linha que começa com **ATENÇÃO** ou **Repete** (com ou sem parêntese), por exemplo `(ATENÇÃO: Vai direto para Como é bom, começa a cantar antes)` ou `(repete: Deixa teu rio)`, aparece **em cinza e menor**: é uma instrução de como tocar, não algo para cantar. Se o `(repete: ...)` ou `(ATENÇÃO: ...)` estiver no fim de um verso, só esse trecho fica cinza. Uma linha que começa com **↻** (ex.: `↻ Introdução e repete o verso`) fica cinza, mas no tamanho normal da letra.
 - Uma linha de cifra pode terminar com um comentário entre parênteses ou `< >`, por exemplo `D   Bm (para cima, segura mais um tempo)` ou `E <segura mais tempo em E>`. A linha continua sendo cifra e transpõe normalmente (inclusive acordes citados no comentário).
 
 Uma música editada passa a ser guardada como texto simples (sem negrito ou recuos especiais do Evernote).
