@@ -37,7 +37,7 @@ Os cinco primeiros precisam ficar **sempre juntos na mesma pasta** e ser publica
 
 ### Lista de músicas e busca
 - A **lista lateral** mostra todas as músicas em ordem alfabética, **ignorando acentos e maiúsculas** ("Águas purificadoras" fica entre "Adoramos o Cordeiro" e "Ajuntamento"). Clique num título para ir até a música.
-- A **busca** (campo logo acima da lista de músicas, abaixo dos atalhos) filtra enquanto você digita. Enquanto há texto na busca, os atalhos se recolhem numa linha só, para os resultados terem espaço. Ela procura no **título, na letra e nas cifras**, sem diferenciar acentos nem maiúsculas: buscar "bencao" encontra "bênção". O contador abaixo mostra quantas músicas foram encontradas.
+- A **busca** (campo logo acima da lista de músicas, abaixo dos atalhos) filtra enquanto você digita. Enquanto há texto na busca, os atalhos se recolhem numa linha só, para os resultados terem espaço. Ela procura no **título, na letra e nas cifras**, sem diferenciar acentos nem maiúsculas: buscar "bencao" encontra "bênção". Enquanto há texto na busca, uma linha abaixo dela mostra quantas músicas foram encontradas. O total de músicas aparece discreto no rodapé do menu, à esquerda de ⚙ Opções, e é contado sozinho.
 
 ### Visual das músicas
 - Fonte monoespaçada, para manter as cifras alinhadas sobre as sílabas certas.
@@ -255,6 +255,5 @@ Cada música também tem um link na lista lateral, dentro de `<nav id="nav">`:
 
 **Ao adicionar, remover ou renomear uma música:**
 - mantenha o `<section>` e o link `<a>` da lista **na mesma ordem** (alfabética, ignorando acentos) e com o **mesmo `id`**;
-- atualize o contador `<div id="info">342 músicas</div>`;
 - ao renomear, acrescente `"nome antigo": "nome novo"` em `var REN = {...}` (início do arquivo), para não perder atalhos, tons, tamanhos e anotações salvos;
 - ao remover uma versão repetida, acrescente `"versão removida": ["versão que fica", ajuste]` em `var MRG = {...}`.

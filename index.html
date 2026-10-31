@@ -59,12 +59,15 @@ body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 Arial,Helvetic
 #info{margin-top:6px;font-size:12px;color:var(--muted)}
 #toprow{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
 #toprow #info{margin-top:0}
+#info[hidden]{display:none}
 .themebtn{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:5px;padding:2px 8px;cursor:pointer}
 .themebtn:hover{border-color:var(--accent);color:var(--accent)}
 #opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 #opts[hidden]{display:none}
 #optbox{border-top:1px solid var(--line);padding:4px 12px 8px}
-#optbtn{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);cursor:pointer;padding:6px 0;width:100%;text-align:left;display:flex;justify-content:space-between}
+#optrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#optbtn{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);cursor:pointer;padding:6px 0;text-align:left;display:flex;gap:6px}
+#total{font-size:12px;color:var(--muted)}
 #optbtn:hover,#optbtn[aria-expanded="true"]{color:var(--accent)}
 #fitbtn.on,#lyrbtn.on{border-color:var(--accent);color:var(--accent)}
 .tbtns{display:flex;gap:6px}
@@ -103,6 +106,7 @@ body.onlyfav main{padding-bottom:90px}
 #favbackup button{font:inherit;font-size:11.5px;border:0;background:none;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0 8px 0 0}
 #favs{display:flex;flex-direction:column;gap:4px}
 .favempty{font-size:12px;color:var(--muted)}
+#favonly[hidden]{display:none}
 .chip{display:flex;align-items:center;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px 2px 2px 8px;font-size:13px;cursor:grab}
 .chip.over{background:var(--mark)}
 .chip .num{color:var(--muted);min-width:1.8em;font-size:12px}
@@ -232,7 +236,7 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <div id="favs"></div>
 </div>
 <div id="top"><input id="q" type="search" placeholder="Buscar em letras, cifras e títulos…" autocomplete="off">
-<div id="info">342 músicas</div></div>
+<div id="info" hidden></div></div>
 <nav id="nav">
 <a href="#n11" data-i="11">A Alegria</a>
 <a href="#n12" data-i="12">A Ele a Glória</a>
@@ -577,7 +581,7 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <a href="#n318" data-i="318">Vim para adorar-te (Luz do mundo)</a>
 <a href="#n319" data-i="319">Vou me Lembrar - Resgate</a>
 </nav>
-<div id="optbox"><button type="button" id="optbtn" aria-expanded="false">⚙ Opções <span>▸</span></button>
+<div id="optbox"><div id="optrow"><span id="total"></span><button type="button" id="optbtn" aria-expanded="false">⚙ Opções <span>▸</span></button></div>
 <div id="opts" hidden><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button></div></div>
 </aside>
 <main id="main">
@@ -8844,8 +8848,11 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
       el.classList.toggle('hide',!ok);links[i].classList.toggle('hide',!ok);
       if(ok)n++;
     });
-    info.textContent=v?(n+' de '+notes.length+' músicas'):(notes.length+' músicas');
+    // only while searching: how many were found (the total sits at the bottom of the menu)
+    info.hidden=!v;
+    info.textContent=!v?'':n?(n+' de '+notes.length+' músicas'):'Nenhuma música encontrada';
   }
+  document.getElementById('total').textContent=notes.length+' músicas';
   q.addEventListener('input',function(){clearTimeout(t);t=setTimeout(run,150)});
 })();
 </script>
@@ -9155,6 +9162,7 @@ window.TONES = TONES;
       s.title = on ? 'Remover dos atalhos' : 'Adicionar aos atalhos';
     });
     cnt.textContent = list.length ? '(' + list.length + ')' : '';
+    onlyBtn.hidden = !list.length;  // nothing to filter without shortcuts
     if (!list.length && document.body.classList.contains('onlyfav')) setOnly(false);
     document.dispatchEvent(new Event('atalhos-mudou'));
   }
