@@ -120,6 +120,7 @@ body.onlyfav .note:not(.fav),body.onlyfav #nav a:not(.fav){display:none}
 .star.on{border-color:#e5a50a;color:#b57d00;background:var(--mark)}
 .memobtn{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--side);color:var(--fg);border-radius:14px;padding:3px 10px;cursor:pointer}
 .memobtn.on{border-color:#e5a50a}
+.memobtn .ico{width:1.25em;height:1.25em;margin:0;vertical-align:-.3em}
 .hbtns{margin-left:auto;display:flex;gap:8px}
 .hbtns .star{margin-left:0}
 .memo{margin:0 0 12px;padding:8px 10px;border-left:3px solid #e5a50a;background:var(--memo);border-radius:4px;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;cursor:pointer}
@@ -9448,6 +9449,8 @@ window.TONES = TONES;
   var KEY = 'notas-musicas', memos = {}, reg = {};
   try { memos = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { memos = {}; }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(memos)); } catch (e) {} }
+  // speech bubble with lines of text: reads as "note" on the phone, where only the icon shows
+  var BUBBLE = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8.9a1.6 1.6 0 0 0-1.1.5L3.8 21.5a.5.5 0 0 1-.8-.4V5a2 2 0 0 1 2-2z"/><path d="M7.5 7.5h6M7.5 10.5h8.5M7.5 13.5h4.5"/></svg>';
   [].forEach.call(document.querySelectorAll('.note'), function (note) {
     var key = note.getAttribute('data-key');
     var btn = document.createElement('button');
@@ -9466,7 +9469,7 @@ window.TONES = TONES;
       box.hidden = !t || !!ed;
       box.innerHTML = '<b>Anotação</b>';
       box.appendChild(document.createTextNode(t));
-      btn.innerHTML = '✎<span class="mtxt"> ' + (t ? 'anotação' : 'anotar') + '</span>';
+      btn.innerHTML = BUBBLE + '<span class="mtxt"> ' + (t ? 'anotação' : 'anotar') + '</span>';
       btn.classList.toggle('on', !!t);
       btn.title = t ? 'Editar a anotação desta música' : 'Escrever uma anotação para esta música (ex.: intro 2x, final lento)';
     }
