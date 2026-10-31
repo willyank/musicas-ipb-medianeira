@@ -135,6 +135,7 @@ body.onlyfav .note:not(.fav),body.onlyfav #nav a:not(.fav){display:none}
 .edbanner button,.editbar button,.editor button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:6px;padding:5px 10px;cursor:pointer}
 .edbanner .esend,.editor .esave{border-color:var(--accent);color:var(--accent);font-weight:700}
 .editbar{margin-top:12px}
+.ico{width:1em;height:1em;vertical-align:-.15em;margin-right:.35em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .editbar button{color:var(--muted);border-style:dashed}
 .editor{margin:0 0 12px}
 .editor p{font-size:13px;color:var(--muted);margin:0 0 6px}
@@ -9528,6 +9529,8 @@ window.TONES = TONES;
     window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
   }
 
+  // slanted pencil, drawn so it looks the same on every phone (the ✏ character is lying down in some fonts)
+  var PENCIL = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>';
   notes.forEach(function (n, i) {
     var k = n.getAttribute('data-key'), title = n.getAttribute('data-title'), body = n.querySelector('.body');
     if (!body) return;
@@ -9536,13 +9539,13 @@ window.TONES = TONES;
     // bottom of the song: edit button
     var bar = document.createElement('div');
     bar.className = 'editbar';
-    bar.innerHTML = '<button type="button">✏ editar esta música</button>';
+    bar.innerHTML = '<button type="button">' + PENCIL + 'editar esta música</button>';
     body.insertAdjacentElement('afterend', bar);
     // top of an edited song: what it is and what can be done with it
     if (e) {
       var ban = document.createElement('div');
       ban.className = 'edbanner';
-      ban.innerHTML = '<span><b>✏ Versão editada neste aparelho</b> em ' + fmt(e.data) + '. Só você vê; para ficar definitiva, envie a alteração.</span>' +
+      ban.innerHTML = '<span><b>' + PENCIL + 'Versão editada neste aparelho</b> em ' + fmt(e.data) + '. Só você vê; para ficar definitiva, envie a alteração.</span>' +
         '<button type="button" class="eedit">editar</button><button type="button" class="esend">enviar alteração</button><button type="button" class="eundo">desfazer</button>';
       body.insertAdjacentElement('beforebegin', ban);
       ban.querySelector('.eedit').addEventListener('click', open);
