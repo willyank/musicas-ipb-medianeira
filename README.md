@@ -139,11 +139,14 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
   - a página entra no modo repertório;
   - a lista de atalhos aparece **expandida**, mesmo que a pessoa a tivesse recolhido.
 - Links antigos continuam funcionando quando uma música foi renomeada ou unificada (veja [O que fica salvo](#o-que-fica-salvo-no-aparelho)). Se alguma música do link não existir mais, ela é ignorada e o aviso diz quantas não foram encontradas.
-- Formato do link (exemplo com 5 músicas):
+- Formato do link (exemplo com 6 músicas, duas com o tom mudado):
   ```
-  https://willyank.github.io/musicas-ipb-medianeira/#r=eyJ2IjoxLCJzIjpbWyJIaW5vIDAwNCAt...
+  https://willyank.github.io/musicas-ipb-medianeira/#repertorio=3226.lp9g+2.lG6w.Xm0b-3.rT1T.PdMg
   ```
-  O trecho depois de `#r=` é o repertório codificado (títulos, ordem, tons e anotações). A letra e as cifras não vão no link, porque já estão no site.
+  Cada música vira um **código de 4 letras** calculado a partir do nome (`lp9g`), seguido da mudança de tom quando houver (`+2`, `-3`), na ordem do repertório. Assim o link fica curto no WhatsApp (umas 2 linhas). A letra e as cifras não vão no link, porque já estão no site.
+  - **Anotações e músicas editadas** vão depois de um `!`, comprimidas: o link fica mais longo, mas cerca de 3 vezes menor do que seria sem comprimir.
+  - Os códigos também reconhecem os **nomes antigos** de músicas renomeadas ou unificadas (`REN`/`MRG`), então links antigos continuam abrindo.
+  - Se um dia duas músicas gerarem o mesmo código, aquele repertório é enviado no formato antigo (`#r=`, com os nomes completos), que continua funcionando.
 
 ### Exportar / importar atalhos
 - **exportar** (no botão **⋯** dos atalhos) salva os atalhos num arquivo `atalhos-musicas.json`.
