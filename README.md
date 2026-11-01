@@ -126,7 +126,6 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
 - O botão **só atalhos** liga o **modo repertório**:
   - mostra apenas as músicas dos atalhos, **na ordem das etiquetas**;
   - no fim de cada música aparece **◀ anterior · 2 de 5 · próxima: [nome] ▶**;
-  - botões flutuantes **◀ 2 / 5 ▶** no pé da tela passam de música sem precisar rolar até o fim. Eles somem enquanto o rodapé da música (anterior / próxima) está visível, para não ficar um por cima do outro;
   - a barra do topo do celular mostra o nome da música que está na tela, seguindo a ordem do repertório;
   - **ver todas** volta a mostrar o repertório inteiro.
   - a **busca** continua procurando em **todas** as músicas, não só nos atalhos (as que são atalho aparecem com ★ na lista). Ao apagar a busca, volta a mostrar só o repertório.

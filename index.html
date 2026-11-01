@@ -81,13 +81,6 @@ body.onlyfav .note.fav .setnav{display:flex;align-items:center;gap:8px;margin-to
 .setnav .snext{margin-left:auto;max-width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-color:var(--accent);color:var(--accent)}
 .setnav .spos{color:var(--muted)}
 .setnav .sprev,.setnav .spos{white-space:nowrap;flex-shrink:0}
-#setfloat{display:none;position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:25;align-items:center;gap:4px;background:var(--side);border:1px solid var(--line);border-radius:26px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.18);transition:opacity .2s}
-body.navvis #setfloat{opacity:0;pointer-events:none}
-body.onlyfav #setfloat{display:flex}
-#setfloat button{font:inherit;font-size:18px;min-width:52px;height:44px;border:0;border-radius:22px;background:var(--accent);color:var(--bg);cursor:pointer}
-#setfloat button:disabled{opacity:.35;cursor:default}
-#fpos{min-width:54px;text-align:center;font-size:14px;color:var(--fg)}
-body.onlyfav main{padding-bottom:90px}
 #nav{overflow:auto;flex:1;padding:6px 0}
 #favbox{border-bottom:1px solid var(--line);padding:8px 12px 10px;max-height:34vh;overflow:auto}
 #favbox.closed #favs,#favbox.closed #favbackup,#favbox.closed #favmore,#favbox.searching #favs,#favbox.searching #favbackup,#favbox.searching #favmore{display:none}
@@ -119,7 +112,7 @@ body.onlyfav main{padding-bottom:90px}
 #nav a.fav::after{content:" ★";color:#e5a50a;font-size:11px}
 body.onlyfav:not(.busca) .note:not(.fav),body.onlyfav:not(.busca) #nav a:not(.fav){display:none}
 body.onlyfav.busca main,body.onlyfav.busca #nav{display:block}
-body.onlyfav.busca .note.fav .setnav,body.onlyfav.busca #setfloat{display:none}
+body.onlyfav.busca .note.fav .setnav{display:none}
 .note h2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .star{margin-left:auto;font:inherit;font-size:13px;border:1px solid var(--line);background:var(--side);color:var(--fg);border-radius:14px;padding:3px 12px;cursor:pointer}
 .star:hover{border-color:#e5a50a}
@@ -150,7 +143,6 @@ body.onlyfav.busca .note.fav .setnav,body.onlyfav.busca #setfloat{display:none}
 .editor div{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}
 #nav a.edited::before{content:"✏ ";color:var(--accent);font-size:11px}
 #favbackup #edexport{color:var(--accent);font-weight:700}
-body.editing #setfloat{display:none !important}
 #nav a{display:block;padding:5px 14px;color:var(--fg);text-decoration:none;font-size:13.5px;border-left:3px solid transparent}
 #nav a:hover{background:var(--line)}
 #nav a.hide{display:none}
@@ -9646,15 +9638,10 @@ window.TONES = TONES;
   var byKey = {};
   notes.forEach(function (n) { byKey[n.getAttribute('data-key')] = n; });
   var A = window.musicasAtalhos, T = window.TONES;
-  function inSet() { return document.body.classList.contains('onlyfav'); }
   function setlist() { return A.get().map(function (k) { return byKey[k]; }).filter(Boolean); }
   function show(n) { n.scrollIntoView({behavior: 'smooth', block: 'start'}); }
-  function current(l) {
-    for (var i = 0; i < l.length; i++) if (l[i].getBoundingClientRect().bottom > 90) return i;
-    return l.length - 1;
-  }
 
-  // 1) repertoire navigation: footer in each song + floating previous/next buttons
+  // 1) repertoire navigation: footer in each song with previous/next
   notes.forEach(function (n) {
     var d = document.createElement('div');
     d.className = 'setnav';
@@ -9663,22 +9650,6 @@ window.TONES = TONES;
     d.querySelector('.sprev').addEventListener('click', function () { var l = setlist(), i = l.indexOf(n); if (i > 0) show(l[i - 1]); });
     d.querySelector('.snext').addEventListener('click', function () { var l = setlist(), i = l.indexOf(n); if (i > -1 && i < l.length - 1) show(l[i + 1]); });
   });
-  var fl = document.createElement('div');
-  fl.id = 'setfloat';
-  fl.innerHTML = '<button type="button" id="fprev" aria-label="Música anterior">◀</button><span id="fpos"></span><button type="button" id="fnext" aria-label="Próxima música">▶</button>';
-  document.body.appendChild(fl);
-  var fprev = document.getElementById('fprev'), fnext = document.getElementById('fnext'), fpos = document.getElementById('fpos');
-  fprev.addEventListener('click', function () { var l = setlist(), i = current(l); if (i > 0) show(l[i - 1]); });
-  fnext.addEventListener('click', function () { var l = setlist(), i = current(l); if (i < l.length - 1) show(l[i + 1]); });
-  function updFloat() {
-    if (!inSet()) return;
-    var l = setlist();
-    if (!l.length) return;
-    var i = current(l);
-    fpos.textContent = (i + 1) + ' / ' + l.length;
-    fprev.disabled = i === 0;
-    fnext.disabled = i === l.length - 1;
-  }
   function refresh() {
     var l = setlist();
     l.forEach(function (n, i) {
@@ -9688,29 +9659,9 @@ window.TONES = TONES;
       x.disabled = i === l.length - 1;
       x.textContent = i < l.length - 1 ? 'próxima: ' + l[i + 1].getAttribute('data-title') + ' ▶' : 'fim do repertório';
     });
-    updFloat();
   }
-  var tick = false;
-  window.addEventListener('scroll', function () {
-    if (tick) return;
-    tick = true;
-    requestAnimationFrame(function () { tick = false; updFloat(); });
-  }, {passive: true});
   document.addEventListener('atalhos-mudou', refresh);
   refresh();
-  // the footer of each song already has previous/next: hide the floating buttons while it is on screen
-  if ('IntersectionObserver' in window) {
-    var onScreen = [];
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        var i = onScreen.indexOf(e.target);
-        if (e.isIntersecting && i === -1) onScreen.push(e.target);
-        else if (!e.isIntersecting && i !== -1) onScreen.splice(i, 1);
-      });
-      document.body.classList.toggle('navvis', onScreen.length > 0);
-    });
-    [].forEach.call(document.querySelectorAll('.setnav'), function (d) { io.observe(d); });
-  }
 
   // 2) keep the screen on while the page is open
   var WK = 'tela-acesa', wbtn = document.getElementById('wakebtn'), wl = null;
