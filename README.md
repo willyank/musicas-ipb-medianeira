@@ -227,6 +227,8 @@ Em 1–2 minutos o site novo está no ar. Quem estiver online recebe a nova vers
 
 O arquivo `.gitignore` deixa entrar no repositório **apenas** os arquivos do site, este README e o script de `ferramentas`. A conversa do WhatsApp, o PDF do hinário, a pasta `backups` e qualquer outro arquivo da pasta nunca são enviados.
 
+**Segurança:** o início do `index.html` tem uma *política de segurança de conteúdo* (`<meta http-equiv="Content-Security-Policy">`). Ela só deixa a página carregar e enviar coisas para o próprio site; links para outros sites (Cifra Club, WhatsApp) continuam abrindo normalmente. Se um dia a página precisar carregar algo de fora (uma fonte, uma imagem, um script de outro endereço), esse endereço precisa ser acrescentado nessa linha, senão o navegador bloqueia.
+
 ---
 
 ## Como editar o conteúdo
