@@ -136,7 +136,8 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
   - os atalhos da pessoa são **substituídos** pelos do link;
   - os tons combinados são aplicados;
   - as anotações do link substituem as da pessoa nessas músicas (músicas sem anotação no link mantêm as da pessoa);
-  - a página entra no modo repertório.
+  - a página entra no modo repertório;
+  - a lista de atalhos aparece **expandida**, mesmo que a pessoa a tivesse recolhido.
 - Links antigos continuam funcionando quando uma música foi renomeada ou unificada (veja [O que fica salvo](#o-que-fica-salvo-no-aparelho)). Se alguma música do link não existir mais, ela é ignorada e o aviso diz quantas não foram encontradas.
 - Formato do link (exemplo com 5 músicas):
   ```

@@ -9278,6 +9278,7 @@ window.TONES = TONES;
     try { if (v) localStorage.setItem(KEY, '1'); else localStorage.removeItem(KEY); } catch (e) {}
   }
   try { if (localStorage.getItem(KEY)) setClosed(true); } catch (e) {}
+  window.abrirAtalhos = function () { box.classList.remove('searching'); setClosed(false); };
   tog.addEventListener('click', function () {
     var searching = box.classList.contains('searching');
     box.classList.remove('searching');
@@ -9741,6 +9742,7 @@ window.TONES = TONES;
           if (x[3] && window.EDICOES) EDICOES.set(x[0], x[3]);
         });
         A.only(true);
+        if (window.abrirAtalhos) abrirAtalhos();  // a shared repertoire always opens with the shortcuts unfolded
         reloadEdits = edits > 0;
       }
     } catch (e) { alert('Este link de repertório está incompleto ou inválido.'); }
