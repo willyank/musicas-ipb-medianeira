@@ -9,6 +9,8 @@
 !icon-192.png
 !icon-512.png
 !README.md
+!js/
+!js/*.js
 !ferramentas/
 ferramentas/*
 !ferramentas/aplicar_alteracoes.py

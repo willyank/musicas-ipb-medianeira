@@ -41,7 +41,7 @@ def limpar(t):
 
 
 class _Texto(HTMLParser):
-    """the song as text, with the same rules as the page's editor (textOf in index.html)"""
+    """the song as text, with the same rules as the page's editor (textOf in js/edicoes-base.js)"""
     BLOCK = {'div', 'pre', 'p', 'li', 'ol', 'ul', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'table', 'tr', 'td'}
     LINE_TAGS = {'li', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
 

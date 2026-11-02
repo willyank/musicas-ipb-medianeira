@@ -12,7 +12,8 @@ O uso pensado é: no **ensaio**, escolher as músicas, ajustar o tom e anotar co
 
 | Arquivo | Para que serve |
 |---|---|
-| `index.html` | A página completa: todas as músicas, estilos e funcionalidades num único arquivo. É o único arquivo que precisa ser editado. |
+| `index.html` | A página: todas as músicas e os estilos. É onde se editam as músicas. |
+| `js/` | O código das funcionalidades, um arquivo por assunto (veja [Arquivos de código](#arquivos-de-código-js)). |
 | `manifest.webmanifest` | Descreve o "app" (nome, cores, ícones) para o celular poder instalá-lo na tela inicial. |
 | `sw.js` | Service worker: guarda uma cópia da página no celular para ela abrir **sem internet**. |
 | `icon-192.png`, `icon-512.png` | Ícones do app. |
@@ -20,9 +21,34 @@ O uso pensado é: no **ensaio**, escolher as músicas, ajustar o tom e anotar co
 | `.gitignore`, `.nojekyll` | Controlam o que vai para o GitHub (só os arquivos do site) e fazem o GitHub Pages publicar os arquivos como estão. |
 | `ferramentas/aplicar_alteracoes.py` | Script que torna definitivas as músicas editadas nos ensaios (veja [Editar uma música no ensaio](#editar-uma-música-no-ensaio)). Não é usado pela página. |
 
-Os cinco primeiros precisam ficar **sempre juntos na mesma pasta** e ser publicados juntos.
+Os seis primeiros (contando a pasta `js`) precisam ficar **sempre juntos na mesma pasta** e ser publicados juntos.
 
 **Não publicar** outros arquivos que estejam na pasta, como a conversa exportada do WhatsApp (tem nomes e telefones do grupo), o PDF do hinário e a pasta `backups`. Eles não são usados pela página.
+
+---
+
+### Arquivos de código (`js/`)
+
+O `index.html` carrega estes arquivos no fim da página, **nesta ordem** (a ordem importa: um usa o que o anterior preparou):
+
+| Arquivo | O que faz |
+|---|---|
+| `tema-inicial.js` | Aplica o tema escolhido antes de desenhar a página, para não piscar (carregado no início). |
+| `nomes-antigos.js` | `REN`/`MRG`: títulos renomeados e versões unificadas, para não perder o que ficou salvo (carregado no início). |
+| `edicoes-base.js` | Músicas editadas no ensaio: guarda no aparelho e mostra no lugar da versão oficial. |
+| `busca.js` | Busca em títulos, letras e cifras. |
+| `cifras.js` | Reconhece as linhas de cifra e muda o tom (transposição). |
+| `atalhos.js` | Atalhos (☆), "só atalhos", exportar/importar. |
+| `menu-celular.js` | Gaveta do menu no celular, botão voltar e título da música na barra do topo. |
+| `menu-lateral.js` | Atalhos recolhíveis, "⋯" e "⚙ Opções". |
+| `tema.js` | Botão de tema (automático, claro, escuro). |
+| `tamanho-letra.js` | A- / A+ de cada música. |
+| `caber-na-tela.js` | "Caber na tela" e "só letra". |
+| `anotacoes.js` | Anotação por música. |
+| `edicoes.js` | Botão "editar esta música" e envio da alteração. |
+| `repertorio.js` | Modo repertório, tela acesa, link de repertório e modo sem internet. |
+
+Ao criar um arquivo novo em `js/`, inclua-o também na lista `FILES` do `sw.js`, para funcionar sem internet.
 
 ---
 
@@ -186,7 +212,7 @@ Tudo é salvo no **armazenamento local do navegador** (`localStorage`), separado
 
 **Esses dados se perdem** se você limpar os dados de navegação ou usar janela anônima. Eles também **não passam** de um aparelho para outro, nem de um navegador para outro. Para levar o repertório, use o link de compartilhamento ou exportar/importar.
 
-Tudo é guardado pelo **título da música**. Um pequeno script no início do `index.html` converte automaticamente os atalhos, tons, tamanhos e anotações salvos com nomes antigos:
+Tudo é guardado pelo **título da música**. O script `js/nomes-antigos.js` converte automaticamente os atalhos, tons, tamanhos e anotações salvos com nomes antigos:
 - `var REN = {...}`: títulos renomeados (`"nome antigo": "nome novo"`);
 - `var MRG = {...}`: versões repetidas que foram removidas (`"versão removida": ["versão que ficou", ajuste]`). O ajuste, em semitons, é somado ao tom salvo, para a música continuar com as mesmas cifras. Exemplo: quem tinha "Tu És Santo (E)" passa a ter "Tu És Santo (G)" com −3, que mostra as mesmas cifras em E.
 
@@ -227,7 +253,7 @@ Em 1–2 minutos o site novo está no ar. Quem estiver online recebe a nova vers
 
 O arquivo `.gitignore` deixa entrar no repositório **apenas** os arquivos do site, este README e o script de `ferramentas`. A conversa do WhatsApp, o PDF do hinário, a pasta `backups` e qualquer outro arquivo da pasta nunca são enviados.
 
-**Segurança:** o início do `index.html` tem uma *política de segurança de conteúdo* (`<meta http-equiv="Content-Security-Policy">`). Ela só deixa a página carregar e enviar coisas para o próprio site; links para outros sites (Cifra Club, WhatsApp) continuam abrindo normalmente. Se um dia a página precisar carregar algo de fora (uma fonte, uma imagem, um script de outro endereço), esse endereço precisa ser acrescentado nessa linha, senão o navegador bloqueia.
+**Segurança:** o início do `index.html` tem uma *política de segurança de conteúdo* (`<meta http-equiv="Content-Security-Policy">`). Ela só deixa a página carregar e enviar coisas para o próprio site, e só aceita código que esteja nos arquivos de `js/` (código escrito dentro do `index.html` é bloqueado); links para outros sites (Cifra Club, WhatsApp) continuam abrindo normalmente. Se um dia a página precisar carregar algo de fora (uma fonte, uma imagem, um script de outro endereço), esse endereço precisa ser acrescentado nessa linha, senão o navegador bloqueia.
 
 ---
 
@@ -261,5 +287,5 @@ Cada música também tem um link na lista lateral, dentro de `<nav id="nav">`:
 
 **Ao adicionar, remover ou renomear uma música:**
 - mantenha o `<section>` e o link `<a>` da lista **na mesma ordem** (alfabética, ignorando acentos) e com o **mesmo `id`**;
-- ao renomear, acrescente `"nome antigo": "nome novo"` em `var REN = {...}` (início do arquivo), para não perder atalhos, tons, tamanhos e anotações salvos;
-- ao remover uma versão repetida, acrescente `"versão removida": ["versão que fica", ajuste]` em `var MRG = {...}`.
+- ao renomear, acrescente `"nome antigo": "nome novo"` em `var REN = {...}` (em `js/nomes-antigos.js`), para não perder atalhos, tons, tamanhos e anotações salvos;
+- ao remover uma versão repetida, acrescente `"versão removida": ["versão que fica", ajuste]` em `var MRG = {...}` (no mesmo arquivo).
