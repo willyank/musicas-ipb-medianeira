@@ -189,7 +189,8 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
 ### Sem internet e instalação como app
 *(só no site publicado)*
 - Na primeira visita, a página fica guardada no aparelho e passa a **abrir sem internet**.
-- Quando há internet, a versão mais nova é baixada automaticamente.
+- Quando há internet, a versão mais nova é baixada automaticamente, logo depois de publicada: a cada abertura o app pergunta ao site se cada arquivo mudou (uma resposta minúscula quando não mudou) e baixa só o que mudou. Assim o `index.html` e os arquivos de `js/` nunca ficam em versões diferentes.
+- Um app que ficou **aberto em segundo plano** continua com a versão que já estava na tela: para ver a nova, feche o app (tirando-o da lista de apps recentes) e abra de novo.
 - Para instalar, use a opção **"Adicionar à tela inicial"** do navegador (Android: menu ⋮; iPhone: botão Compartilhar). O app aparece como **"Músicas IPB"**, com o ícone ♫ IPB.
 
 ---

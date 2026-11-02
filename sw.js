@@ -17,9 +17,13 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
-  // network first (always the latest version when online), cache as fallback (offline)
+  // network first (always the latest version when online), cache as fallback (offline).
+  // "no-cache": ask the server whether the file changed instead of reusing the browser's copy
+  // (GitHub Pages allows 10 minutes), so index.html and the js files never mix versions.
+  // A page request (mode "navigate") can't be copied with new options, so it is fetched by its address.
+  const net = req.mode === 'navigate' ? fetch(req.url, {cache: 'no-cache'}) : fetch(req, {cache: 'no-cache'});
   e.respondWith(
-    fetch(req)
+    net
       .then((res) => {
         if (res.ok) {
           const copy = res.clone();
