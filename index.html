@@ -150,6 +150,12 @@ mark{background:var(--mark);color:inherit}
 .tbar .tlabel.mod{color:var(--accent);font-weight:700}
 .tbar .tlabel:hover,.tbar .slabel:hover{color:var(--accent)}
 #toplink{position:fixed;right:16px;bottom:16px;background:var(--accent);color:var(--bg);border-radius:20px;padding:8px 14px;text-decoration:none;font-size:13px}
+#novaversao{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:45;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);background:var(--side);color:var(--fg);border:1px solid var(--accent);border-radius:12px;padding:8px 8px 8px 14px;box-shadow:0 2px 12px rgba(0,0,0,.25);font-size:14px}
+#novaversao[hidden],body.editing #novaversao{display:none}
+#novaversao span{white-space:nowrap}
+#novaversao button{font:inherit;border:0;border-radius:8px;cursor:pointer;min-height:40px}
+#novaversao .nvok{background:var(--accent);color:var(--bg);padding:0 16px;font-weight:700}
+#novaversao .nvx{background:none;color:var(--muted);font-size:20px;padding:0 8px}
 main{min-width:0;max-width:100%}
 .body{overflow-x:auto}
 .note{scroll-margin-top:60px}
@@ -8728,5 +8734,6 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <script src="js/anotacoes.js"></script>
 <script src="js/edicoes.js"></script>
 <script src="js/repertorio.js"></script>
+<script src="js/atualizacao.js"></script>
 </body>
 </html>
