@@ -195,6 +195,7 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
   - Se houve, aparece no pé da tela o aviso **"Músicas atualizadas. [Atualizar]"**. Tocando em **Atualizar**, a página recarrega e volta para a música que estava na tela, com os atalhos, tons e anotações de antes. O **×** fecha o aviso (ele volta só numa publicação seguinte).
   - A página **nunca recarrega sozinha**, para a música não pular no meio do culto. Enquanto alguém edita uma música, o aviso fica escondido.
   - Qualquer publicação gera o aviso, mesmo uma que só mude este README (o GitHub muda a data de todos os arquivos ao publicar).
+- **Qual versão está no aparelho:** dentro de **⚙ Opções** (no rodapé do menu), abaixo dos botões, aparece **"versão de DD/MM HH:mm"**: a data e a hora da publicação de onde veio a página que está na tela. Para saber se o app de alguém está atualizado, compare com o que aparece no seu aparelho (ou no computador) depois de publicar: se a data for mais antiga, o app dessa pessoa ainda não pegou a versão nova (é só fechar e abrir o app, ou tocar em Atualizar no aviso).
 - Para instalar, use a opção **"Adicionar à tela inicial"** do navegador (Android: menu ⋮; iPhone: botão Compartilhar). O app aparece como **"Músicas IPB"**, com o ícone ♫ IPB.
 
 ---

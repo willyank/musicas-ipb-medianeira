@@ -36,6 +36,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 Arial,Helvetic
 #optrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
 #optbtn{font:inherit;font-size:13px;border:0;background:none;color:var(--muted);cursor:pointer;padding:6px 0;text-align:left;display:flex;gap:6px}
 #total{font-size:12px;color:var(--muted)}
+#versao{flex-basis:100%;font-size:11px;color:var(--muted)}
 #optbtn:hover,#optbtn[aria-expanded="true"]{color:var(--accent)}
 #fitbtn.on,#lyrbtn.on{border-color:var(--accent);color:var(--accent)}
 .tbtns{display:flex;gap:6px}
@@ -550,7 +551,7 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <a href="#n319" data-i="319">Vou me Lembrar - Resgate</a>
 </nav>
 <div id="optbox"><div id="optrow"><span id="total"></span><button type="button" id="optbtn" aria-expanded="false">⚙ Opções <span>▸</span></button></div>
-<div id="opts" hidden><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button></div></div>
+<div id="opts" hidden><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button><span id="versao"></span></div></div>
 </aside>
 <main id="main">
 <section class="note" id="n11" data-key="A Alegria" data-title="A Alegria"><h2>A Alegria</h2><div class="body"><div class="para">Tom: <a class="en-link" href="https://www.cifraclub.com.br/corinhos-evangelicos/a-alegria-esta-no-coracao/#" rev="en_rl_none" shape="rect" target="_blank" title="alterar o tom">G</a></div><pre class="code"><span class="ln">[Primeira Parte]</span>

@@ -1,5 +1,9 @@
 // avisa quando uma versão nova do site foi publicada, para quem está com o app aberto atualizar com um toque
 (function () {
+  // version on screen, inside "⚙ Opções": the date of the publication this page came from, to compare phones
+  // ("versão de 02/11 10:04"); everyone with the latest version shows the same date
+  var d = new Date(document.lastModified), p2 = function (n) { return (n < 10 ? '0' : '') + n; };
+  if (!isNaN(d)) document.getElementById('versao').textContent = 'versão de ' + p2(d.getDate()) + '/' + p2(d.getMonth() + 1) + ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes());
   if (!/^https?:$/.test(location.protocol) || !window.fetch) return;
   // GitHub Pages gives every file the time of the last publication as Last-Modified, so the page's own
   // date (the version on screen) against the date the site gives now tells whether something was published
