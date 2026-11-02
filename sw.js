@@ -3,7 +3,7 @@ const CACHE = 'musicas-ipb-v2';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png',
   'js/tema-inicial.js', 'js/nomes-antigos.js', 'js/edicoes-base.js', 'js/busca.js', 'js/cifras.js', 'js/atalhos.js',
   'js/menu-celular.js', 'js/menu-lateral.js', 'js/tema.js', 'js/tamanho-letra.js', 'js/caber-na-tela.js', 'js/anotacoes.js', 'js/edicoes.js', 'js/repertorio.js',
-  'js/atualizacao.js'];
+  'js/atualizacao.js', 'js/instalar.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));

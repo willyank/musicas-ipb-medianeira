@@ -151,12 +151,14 @@ mark{background:var(--mark);color:inherit}
 .tbar .tlabel.mod{color:var(--accent);font-weight:700}
 .tbar .tlabel:hover,.tbar .slabel:hover{color:var(--accent)}
 #toplink{position:fixed;right:16px;bottom:16px;background:var(--accent);color:var(--bg);border-radius:20px;padding:8px 14px;text-decoration:none;font-size:13px}
-#novaversao{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:45;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);background:var(--side);color:var(--fg);border:1px solid var(--accent);border-radius:12px;padding:8px 8px 8px 14px;box-shadow:0 2px 12px rgba(0,0,0,.25);font-size:14px}
-#novaversao[hidden],body.editing #novaversao{display:none}
+#novaversao,#instalar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:45;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);background:var(--side);color:var(--fg);border:1px solid var(--accent);border-radius:12px;padding:8px 8px 8px 14px;box-shadow:0 2px 12px rgba(0,0,0,.25);font-size:14px}
+#novaversao[hidden],body.editing #novaversao,#instalar[hidden],body.editing #instalar{display:none}
+body:has(#novaversao:not([hidden])) #instalar{display:none}
+#instalar{width:max-content;max-width:min(560px,calc(100vw - 32px))}
 #novaversao span{white-space:nowrap}
-#novaversao button{font:inherit;border:0;border-radius:8px;cursor:pointer;min-height:40px}
-#novaversao .nvok{background:var(--accent);color:var(--bg);padding:0 16px;font-weight:700}
-#novaversao .nvx{background:none;color:var(--muted);font-size:20px;padding:0 8px}
+#novaversao button,#instalar button{font:inherit;border:0;border-radius:8px;cursor:pointer;min-height:40px;flex-shrink:0}
+#novaversao .nvok,#instalar .nvok{background:var(--accent);color:var(--bg);padding:0 16px;font-weight:700}
+#novaversao .nvx,#instalar .nvx{background:none;color:var(--muted);font-size:20px;padding:0 8px}
 main{min-width:0;max-width:100%}
 .body{overflow-x:auto}
 .note{scroll-margin-top:60px}
@@ -551,7 +553,7 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <a href="#n319" data-i="319">Vou me Lembrar - Resgate</a>
 </nav>
 <div id="optbox"><div id="optrow"><span id="total"></span><button type="button" id="optbtn" aria-expanded="false">⚙ Opções <span>▸</span></button></div>
-<div id="opts" hidden><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button><span id="versao"></span></div></div>
+<div id="opts" hidden><button type="button" class="themebtn" id="wakebtn">☼ Tela acesa</button><button type="button" class="themebtn" id="themebtn" title="Alternar tema">◐ Automático</button><button type="button" class="themebtn" id="fitbtn">↔ Caber na tela</button><button type="button" class="themebtn" id="lyrbtn">♪ Letra e cifra</button><button type="button" class="themebtn" id="instbtn" hidden>📲 Instalar app</button><span id="versao"></span></div></div>
 </aside>
 <main id="main">
 <section class="note" id="n11" data-key="A Alegria" data-title="A Alegria"><h2>A Alegria</h2><div class="body"><div class="para">Tom: <a class="en-link" href="https://www.cifraclub.com.br/corinhos-evangelicos/a-alegria-esta-no-coracao/#" rev="en_rl_none" shape="rect" target="_blank" title="alterar o tom">G</a></div><pre class="code"><span class="ln">[Primeira Parte]</span>
@@ -8742,5 +8744,6 @@ body.nochords .body{font-size:calc(16px * var(--fs, 1))}
 <script src="js/edicoes.js"></script>
 <script src="js/repertorio.js"></script>
 <script src="js/atualizacao.js"></script>
+<script src="js/instalar.js"></script>
 </body>
 </html>

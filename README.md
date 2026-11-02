@@ -48,6 +48,7 @@ O `index.html` carrega estes arquivos no fim da página, **nesta ordem** (a orde
 | `edicoes.js` | Botão "editar esta música" e envio da alteração. |
 | `repertorio.js` | Modo repertório, tela acesa, link de repertório e modo sem internet. |
 | `atualizacao.js` | Aviso "Músicas atualizadas" quando há uma publicação nova com o app aberto. |
+| `instalar.js` | Convite para instalar o app (botão no Android, passo a passo no iPhone). |
 
 Ao criar um arquivo novo em `js/`, inclua-o também na lista `FILES` do `sw.js`, para funcionar sem internet.
 
@@ -197,6 +198,11 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
   - Qualquer publicação gera o aviso, mesmo uma que só mude este README (o GitHub muda a data de todos os arquivos ao publicar).
 - **Qual versão está no aparelho:** dentro de **⚙ Opções** (no rodapé do menu), abaixo dos botões, aparece **"versão de DD/MM HH:mm"**: a data e a hora da publicação de onde veio a página que está na tela. Para saber se o app de alguém está atualizado, compare com o que aparece no seu aparelho (ou no computador) depois de publicar: se a data for mais antiga, o app dessa pessoa ainda não pegou a versão nova (é só fechar e abrir o app, ou tocar em Atualizar no aviso).
 - Para instalar, use a opção **"Adicionar à tela inicial"** do navegador (Android: menu ⋮; iPhone: botão Compartilhar). O app aparece como **"Músicas IPB"**, com o ícone ♫ IPB.
+- **Convite para instalar** (para quem não acha a opção do navegador):
+  - **Android** (Chrome, Edge, Samsung): quando o navegador permite instalar, aparece no pé da tela **"Instale o app de músicas… [Instalar]"**; tocar em Instalar abre a janela de instalação do próprio navegador.
+  - **iPhone**: a Apple não permite um botão de instalar; alguns segundos depois de abrir aparece **"[Como instalar]"**, que mostra o passo a passo (Compartilhar → "Adicionar à Tela de Início").
+  - O **×** fecha o aviso de vez naquele aparelho; o botão **📲 Instalar app** continua em **⚙ Opções**.
+  - Quem já abriu pelo app instalado não vê nem o aviso nem o botão.
 
 ---
 
