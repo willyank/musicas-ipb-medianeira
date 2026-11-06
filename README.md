@@ -288,7 +288,7 @@ Cada música é um bloco `<section>`:
 - `data-key` é o identificador usado para salvar atalhos, tons e tamanhos. Normalmente é igual ao título.
 - As linhas da música ficam dentro de `<div class="body">`. Algumas estão em `<div class="para">` (uma por linha) e outras em blocos `<pre class="code">` / `<pre class="ocr">` com uma `<span class="ln">` por linha. Partes em negrito usam `<b>`.
 - As cores das cifras **não** estão no texto. A página reconhece as linhas de cifra ao abrir e as pinta de laranja; para alinhar, basta usar espaços. Uma linha de cifra pode ter, além dos acordes, parênteses, `|`, `2x` e `2ª vez`; qualquer outra palavra faz a linha ser tratada como letra (e não ser transposta).
-- Acordes menores podem ser escritos como `Am` ou `A-` (padrão do hinário), e diminutos como `F#º`.
+- Acordes menores são escritos como `Am`, `F#m7`, `Bm/A` (padronizado em 06/11/2026; o `A-` do hinário ainda é reconhecido, mas não deve mais ser usado). Diminutos: `F#º` (a página não reconhece `F#o`, com a letra "o").
 - **Acorde opcional** (aparece mais claro; quem toca pode pular): na linha de cifra, envolva o acorde em `<span class="opt">...</span>`, por exemplo `D <span class="opt">A</span>    B-`. Ele muda de tom normalmente. Exemplo: Hino 019 - Rei sublime. Uma música editada pelo botão "editar" vira texto simples, e aí a marcação de opcional se perde nessa versão editada.
 - Os estilos que vieram do Evernote (fontes, tamanhos, cores) foram removidos, porque a página define tudo isso. Por isso o arquivo caiu de 3,4 MB para cerca de 1 MB. Só foi mantido o recuo (`style="padding-left:..."`) de algumas linhas.
 
