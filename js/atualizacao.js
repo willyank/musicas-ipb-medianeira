@@ -7,7 +7,7 @@
   if (!/^https?:$/.test(location.protocol) || !window.fetch) return;
   // GitHub Pages gives every file the time of the last publication as Last-Modified, so the page's own
   // date (the version on screen) against the date the site gives now tells whether something was published
-  var shown = Date.parse(document.lastModified), last = 0, HOUR = 60 * 60 * 1000;
+  var shown = Date.parse(document.lastModified), last = 0, EVERY = 5 * 60 * 1000;
   if (!shown) return;
   var bar = null, warned = 0;
   function warn(t) {
@@ -42,10 +42,10 @@
       if (r.ok && t > shown) warn(t);
     }).catch(function () {});
   }
-  // when coming back to the app (e.g. from WhatsApp), when the internet returns and every hour while on screen;
+  // when coming back to the app (e.g. from WhatsApp), when the internet returns and every 5 minutes while on screen;
   // also once shortly after opening, in case the page came from the offline copy
   document.addEventListener('visibilitychange', check);
   window.addEventListener('online', check);
-  setInterval(function () { last = 0; check(); }, HOUR);
+  setInterval(function () { last = 0; check(); }, EVERY);
   setTimeout(check, 10 * 1000);
 })();

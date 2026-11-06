@@ -192,7 +192,7 @@ Uma música editada passa a ser guardada como texto simples (sem negrito ou recu
 *(só no site publicado)*
 - Na primeira visita, a página fica guardada no aparelho e passa a **abrir sem internet**.
 - Quando há internet, a versão mais nova é baixada automaticamente, logo depois de publicada: a cada abertura o app pergunta ao site se cada arquivo mudou (uma resposta minúscula quando não mudou) e baixa só o que mudou. Assim o `index.html` e os arquivos de `js/` nunca ficam em versões diferentes.
-- Com o app **aberto** (ou em segundo plano), ele confere se houve publicação nova quando a pessoa **volta para o app** (por exemplo, depois de usar o WhatsApp), quando a **internet volta** e **a cada 60 minutos** com o app na tela. É um pedido minúsculo (só a data da última publicação).
+- Com o app **aberto** (ou em segundo plano), ele confere se houve publicação nova quando a pessoa **volta para o app** (por exemplo, depois de usar o WhatsApp), quando a **internet volta** e **a cada 5 minutos** com o app na tela. É um pedido minúsculo (só a data da última publicação).
   - Se houve, aparece no pé da tela o aviso **"Músicas atualizadas. [Atualizar]"**. Tocando em **Atualizar**, a página recarrega e volta para a música que estava na tela, com os atalhos, tons e anotações de antes. O **×** fecha o aviso (ele volta só numa publicação seguinte).
   - A página **nunca recarrega sozinha**, para a música não pular no meio do culto. Enquanto alguém edita uma música, o aviso fica escondido.
   - Qualquer publicação gera o aviso, mesmo uma que só mude este README (o GitHub muda a data de todos os arquivos ao publicar).
