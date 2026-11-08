@@ -113,7 +113,9 @@
     function send(url) {
       function fallback() { prompt('Copie o link do repertório:' + note, url); }
       // after compressing, some phones no longer count it as a tap: then the link is shown to copy
-      if (web && navigator.share) navigator.share({title: title, text: title, url: url}).catch(function (e) { if (e && e.name === 'NotAllowedError') fallback(); });
+      // the link goes inside the text, after a blank line ("Repertório 01/11 13:36 (4 músicas)", blank line, link):
+      // with a separate "url" each phone joins text and link its own way (same line, space, line break)
+      if (web && navigator.share) navigator.share({title: title, text: title + '\n\n' + url}).catch(function (e) { if (e && e.name === 'NotAllowedError') fallback(); });
       else if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(function () { alert('Link do repertório copiado. Cole no WhatsApp ou onde quiser.' + note); }, fallback);
       else fallback();
     }
