@@ -195,7 +195,9 @@ window.TONES = TONES;
     var units = collect(note);
     if (!units.length) return;
     var st = {units: units, shift: 0};
-    st.key = detectKey(note.textContent.replace(/ /g, ' '), firstChordText(units[0]));
+    // the key declared in the song (data-tom="G") comes first; then a "Tom: X" line in the text; then the first chord
+    var declared = note.getAttribute('data-tom');
+    st.key = detectKey((declared ? 'Tom: ' + declared + ' ' : '') + note.textContent.replace(/ /g, ' '), firstChordText(units[0]));
     var bar = document.createElement('div');
     bar.className = 'tbar';
     bar.innerHTML = '<span class="tgrp"><button type="button" class="tdown" title="Descer meio tom">−</button>' +

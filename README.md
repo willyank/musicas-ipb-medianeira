@@ -104,7 +104,7 @@ No rodapé da lista lateral (no celular, no fim do menu **☰**) fica **⚙ Opç
 
 ### Transposição de tom
 - Cada música com cifra tem a barra **− Tom: G +**. Cada clique desce ou sobe **meio tom**, até 11 semitons para cada lado. **Tocar no tom** (em azul quando alterado) volta ao original.
-- O rótulo mostra o tom atual e o deslocamento, por exemplo `Tom: B · +2`. O tom é descoberto pela linha "Tom: X" da música ou, se ela não existir, pela primeira cifra.
+- O rótulo mostra o tom atual e o deslocamento, por exemplo `Tom: B · +2`. O tom vem do atributo `data-tom` da música (veja "Como editar o conteúdo"); se ele não existir, de uma linha "Tom: X" no texto; e, por último, da primeira cifra.
 - **Sustenido ou bemol é escolhido automaticamente** pelo tom de destino: F, Bb, Eb, Ab e Db usam bemóis; G, D, A, E, B e F# usam sustenidos.
 - Acordes compostos são transpostos por inteiro: `F#m7/A`, `D/F#`, `C#m7(b5)`, `E4`. A linha "Tom: X" também muda.
 - Os espaços entre as cifras são reajustados para que continuem sobre as mesmas sílabas.
@@ -276,7 +276,7 @@ O `index.html` é um arquivo de texto e pode ser editado em qualquer editor (VS 
 Cada música é um bloco `<section>`:
 
 ```html
-<section class="note" id="n123" data-key="Hino 303 - Pendão real" data-title="Hino 303 - Pendão real">
+<section class="note" id="n123" data-key="Hino 303 - Pendão real" data-title="Hino 303 - Pendão real" data-tom="E">
   <h2>Hino 303 - Pendão real</h2>
   <div class="body">
     ... linhas da música ...
@@ -286,10 +286,11 @@ Cada música é um bloco `<section>`:
 
 - `data-title` e `<h2>` são o título exibido.
 - `data-key` é o identificador usado para salvar atalhos, tons e tamanhos. Normalmente é igual ao título.
+- `data-tom` é o tom da música, mostrado na barra **− Tom: E +** (opcional). Use quando a primeira cifra não é o tom, por exemplo uma música em G que começa em Em. Não é preciso escrever "Tom: E" também no texto: desde 08/11/2026 essas linhas repetidas foram tiradas (as que tinham compasso ou BPM ficaram como `Compasso: 4/4` e `BPM: 70`). Músicas com capotraste mantêm a linha, porque ela explica a forma dos acordes.
 - As linhas da música ficam dentro de `<div class="body">`. Algumas estão em `<div class="para">` (uma por linha) e outras em blocos `<pre class="code">` / `<pre class="ocr">` com uma `<span class="ln">` por linha. Partes em negrito usam `<b>`.
 - As cores das cifras **não** estão no texto. A página reconhece as linhas de cifra ao abrir e as pinta de laranja; para alinhar, basta usar espaços. Uma linha de cifra pode ter, além dos acordes, parênteses, `|`, `2x` e `2ª vez`; qualquer outra palavra faz a linha ser tratada como letra (e não ser transposta).
 - Acordes menores são escritos como `Am`, `F#m7`, `Bm/A` (padronizado em 06/11/2026; o `A-` do hinário ainda é reconhecido, mas não deve mais ser usado). Diminutos: `F#º` (a página não reconhece `F#o`, com a letra "o").
-- **Acorde opcional** (aparece mais claro; quem toca pode pular): na linha de cifra, envolva o acorde em `<span class="opt">...</span>`, por exemplo `D <span class="opt">A</span>    B-`. Ele muda de tom normalmente. Exemplo: Hino 019 - Rei sublime. Uma música editada pelo botão "editar" vira texto simples, e aí a marcação de opcional se perde nessa versão editada.
+- **Acorde opcional** (aparece mais claro; quem toca pode pular): na linha de cifra, envolva o acorde em `<span class="opt">...</span>`, por exemplo `D <span class="opt">A</span>    Bm`. Ele muda de tom normalmente. Exemplo: Hino 019 - Rei sublime. Uma música editada pelo botão "editar" vira texto simples, e aí a marcação de opcional se perde nessa versão editada.
 - Os estilos que vieram do Evernote (fontes, tamanhos, cores) foram removidos, porque a página define tudo isso. Por isso o arquivo caiu de 3,4 MB para cerca de 1 MB. Só foi mantido o recuo (`style="padding-left:..."`) de algumas linhas.
 
 Cada música também tem um link na lista lateral, dentro de `<nav id="nav">`:
