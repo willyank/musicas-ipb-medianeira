@@ -224,13 +224,15 @@ Tudo é salvo no **armazenamento local do navegador** (`localStorage`), separado
 
 **Esses dados se perdem** se você limpar os dados de navegação ou usar janela anônima. Eles também **não passam** de um aparelho para outro, nem de um navegador para outro. Para levar o repertório, use o link de compartilhamento ou exportar/importar.
 
-Tudo é guardado pelo **título da música**. O script `js/nomes-antigos.js` converte automaticamente os atalhos, tons, tamanhos e anotações salvos com nomes antigos:
+Tudo é guardado pelo **título da música**. O script `js/nomes-antigos.js` converte automaticamente os atalhos, tons, tamanhos e anotações salvos com nomes antigos (e, numa música só renomeada, também a versão editada no ensaio):
 - `var REN = {...}`: títulos renomeados (`"nome antigo": "nome novo"`);
 - `var MRG = {...}`: versões repetidas que foram removidas (`"versão removida": ["versão que ficou", ajuste]`). O ajuste, em semitons, é somado ao tom salvo, para a música continuar com as mesmas cifras. Exemplo: quem tinha "Tu És Santo (E)" passa a ter "Tu És Santo (G)" com −3, que mostra as mesmas cifras em E.
 
 As mesmas regras valem para links de repertório antigos.
 
 Versões repetidas removidas em 30/10/2026 (ficou a mais completa de cada uma): Hino 042 (G), Hino 092 (A), Hino 221 (G), Hino 334 (E), Jesus é o Rei da Glória - G (capo 2 casa), Não temas, Eu sou contigo (A) e Tu És Santo (E).
+
+Removidas em 09/11/2026, sem conversão (não eram mais tocadas): Abra os olhos do meu coração (E) e a cópia repetida da versão (D), e Grande é o Senhor (G). As que ficaram foram renomeadas para "Abra os olhos do meu coração" e "Grande é Senhor" (com `REN`).
 
 ---
 
@@ -302,4 +304,4 @@ Cada música também tem um link na lista lateral, dentro de `<nav id="nav">`:
 **Ao adicionar, remover ou renomear uma música:**
 - mantenha o `<section>` e o link `<a>` da lista **na mesma ordem** (alfabética, ignorando acentos) e com o **mesmo `id`**;
 - ao renomear, acrescente `"nome antigo": "nome novo"` em `var REN = {...}` (em `js/nomes-antigos.js`), para não perder atalhos, tons, tamanhos e anotações salvos;
-- ao remover uma versão repetida, acrescente `"versão removida": ["versão que fica", ajuste]` em `var MRG = {...}` (no mesmo arquivo).
+- ao remover uma versão repetida que ainda é usada, acrescente `"versão removida": ["versão que fica", ajuste]` em `var MRG = {...}` (no mesmo arquivo). Se ninguém usa mais, não precisa.
