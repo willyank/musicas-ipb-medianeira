@@ -232,7 +232,7 @@ As mesmas regras valem para links de repertório antigos.
 
 Versões repetidas removidas em 30/10/2026 (ficou a mais completa de cada uma): Hino 042 (G), Hino 092 (A), Hino 221 (G), Hino 334 (E), Jesus é o Rei da Glória - G (capo 2 casa), Não temas, Eu sou contigo (A) e Tu És Santo (E).
 
-Removidas em 09/11/2026, sem conversão (não eram mais tocadas): Abra os olhos do meu coração (E) e a cópia repetida da versão (D), e Grande é o Senhor (G). As que ficaram foram renomeadas para "Abra os olhos do meu coração" e "Grande é Senhor" (com `REN`).
+Removidas em 09/11/2026, sem conversão (não eram mais tocadas): Abra os olhos do meu coração (E) e a cópia repetida da versão (D), e Grande é o Senhor (G). As que ficaram foram renomeadas para "Abra os olhos do meu coração" e "Grande é Senhor" (com `REN`). Em 10/11/2026, do mesmo jeito: sai "Acredito - Leo Gonçalves (E)" e a versão (D) passa a se chamar "Acredito - Léo Gonçalves"; sai "Ele vem pra te salvar (C)" e a versão (D) passa a se chamar "Ele vem pra te salvar"; saem "Hino 003 - A Igreja em Adoração (A 4/4)" e "Hino 003 - Igreja em adoração (G)" e a versão (A) passa a se chamar "Hino 003 - Igreja em adoração"; sai "Hino 010 - A criação e seu Criador (C 3/4)"; as duas que ficam têm cifras para compassos diferentes e passam a se chamar "Hino 010 - A criação e seu Criador (4/4)" (era C 4/4) e "(3/4)" (era D; passou a ser escrita em C, como a 4/4).
 
 ---
 
